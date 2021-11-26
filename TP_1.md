@@ -159,6 +159,7 @@ Répondez en choisissant une seule et bonne réponse ci-dessous.
 
 Révisions
 1/
+```sql
 ALTER TABLE pilots ADD salary INT UNSIGNED AFTER name
 UPDATE pilots SET salary=2000 WHERE name = 'Alan';
 UPDATE pilots SET salary=1500 WHERE name = 'Tom';
@@ -169,6 +170,7 @@ UPDATE pilots SET salary=1500 WHERE name = 'Yan';
 UPDATE pilots SET salary=2000 WHERE name = 'Benoit';
 UPDATE pilots SET salary=3000 WHERE name = 'Jhon';
 UPDATE pilots SET salary=3000 WHERE name = 'Pierre';
+```
 
 Exercice 1
 1/
