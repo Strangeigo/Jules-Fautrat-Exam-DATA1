@@ -173,47 +173,72 @@ UPDATE pilots SET salary=3000 WHERE name = 'Pierre';
 Exercice 1
 1/
 Le salaire moyen est de 2056 arrondi à l'unité près.
+
+```sql
 SELECT ROUND(AVG(salary),0 )
 FROM pilots;
+```
 
 2/
+
+```sql
 SELECT ROUND(AVG(salary),0) AS avg_salary, compagny
 FROM pilots
 GROUP BY compagny;
+```
 
 3/
+
+```sql
 SELECT name, salary
 FROM pilots
 WHERE salary > (SELECT ROUND(AVG(salary),0) FROM pilots)
+```
 
 4/
+
+```sql
 SELECT ROUND(MAX(salary) - MIN(salary),0)
 FROM pilots AS range_salary;
+```
 
 5/
+
+```sql
 SELECT compagny, salary
 FROM pilots
 WHERE salary > (SELECT ROUND(AVG(salary),0) FROM pilots);
+```
 
 6/
+
+```sql
 SELECT name, salary, compagny
 FROM pilots WHERE salary > (SELECT ROUND(AVG(salary),0) FROM pilots)
 GROUP BY compagny;
+```
 
 Exercice 2
 
 1/
+
+```sql
 UPDATE pilots SET salary= salary\*0.6 WHERE compagny = 'AUS'
+```
 
 2/
 
+```sql
 SELECT GROUP_CONCAT(name), compagny, salary AS pilots_names
 FROM pilots
 WHERE compagny = "AUS";
+```
 
 Exo de recherche
 
 1/
+
+```sql
 SELECT DISTINCT p.compagny, plane
 FROM pilots AS p
 INNER JOIN compagnies AS c
@@ -222,8 +247,11 @@ WHERE compagny IN (
 SELECT comp FROM compagnies
 )
 GROUP BY compagny;
+```
 
 2/
+
+```sql
 SELECT c.comp, plane
 FROM pilots AS p
 INNER JOIN compagnies AS c
@@ -235,3 +263,4 @@ FROM pilots AS p
 INNER JOIN compagnies AS c
 ON c.comp = p.compagny
 WHERE c.comp = "FRE1";
+```
