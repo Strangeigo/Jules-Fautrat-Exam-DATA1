@@ -156,3 +156,82 @@ Répondez en choisissant une seule et bonne réponse ci-dessous.
 [x] Sélectionne les compagnies et leurs pilotes n'incluant pas les compagnies n'ayant pas de pilote et les pilotes n'ayant pas de compagnie.
 
 [ ] Sélectionne les compagnies et leurs pilotes uniquement les compagnie ayant des pilotes.
+
+Révisions
+1/
+ALTER TABLE pilots ADD salary INT UNSIGNED AFTER name
+UPDATE pilots SET salary=2000 WHERE name = 'Alan';
+UPDATE pilots SET salary=1500 WHERE name = 'Tom';
+UPDATE pilots SET salary=1500 WHERE name = 'Yi';
+UPDATE pilots SET salary=2000 WHERE name = 'Sophie';
+UPDATE pilots SET salary=2000 WHERE name = 'Albert';
+UPDATE pilots SET salary=1500 WHERE name = 'Yan';
+UPDATE pilots SET salary=2000 WHERE name = 'Benoit';
+UPDATE pilots SET salary=3000 WHERE name = 'Jhon';
+UPDATE pilots SET salary=3000 WHERE name = 'Pierre';
+
+Exercice 1
+1/
+Le salaire moyen est de 2056 arrondi à l'unité près.
+SELECT ROUND(AVG(salary),0 )
+FROM pilots;
+
+2/
+SELECT ROUND(AVG(salary),0) AS avg_salary, compagny
+FROM pilots
+GROUP BY compagny;
+
+3/
+SELECT name, salary
+FROM pilots
+WHERE salary > (SELECT ROUND(AVG(salary),0) FROM pilots)
+
+4/
+SELECT ROUND(MAX(salary) - MIN(salary),0)
+FROM pilots AS range_salary;
+
+5/
+SELECT compagny, salary
+FROM pilots
+WHERE salary > (SELECT ROUND(AVG(salary),0) FROM pilots);
+
+6/
+SELECT name, salary, compagny
+FROM pilots WHERE salary > (SELECT ROUND(AVG(salary),0) FROM pilots)
+GROUP BY compagny;
+
+Exercice 2
+
+1/
+UPDATE pilots SET salary= salary\*0.6 WHERE compagny = 'AUS'
+
+2/
+
+SELECT GROUP_CONCAT(name), compagny, salary AS pilots_names
+FROM pilots
+WHERE compagny = "AUS";
+
+Exo de recherche
+
+1/
+SELECT DISTINCT p.compagny, plane
+FROM pilots AS p
+INNER JOIN compagnies AS c
+ON p.compagny = c.comp
+WHERE compagny IN (
+SELECT comp FROM compagnies
+)
+GROUP BY compagny;
+
+2/
+SELECT c.comp, plane
+FROM pilots AS p
+INNER JOIN compagnies AS c
+ON c.comp = p.compagny
+WHERE c.comp = "AUS"
+UNION
+SELECT c.comp, plane
+FROM pilots AS p
+INNER JOIN compagnies AS c
+ON c.comp = p.compagny
+WHERE c.comp = "FRE1";
